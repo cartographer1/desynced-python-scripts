@@ -10,28 +10,28 @@ def FactoryHub(Item, N_Slots):
       stack_size = GetMaxStack(item)
       product *= stack_size
 
-    weights = _
+    weights_id = 1
+    ArrayClear(weights_id)
     total_weight = 0
     for item in LoopRecipeIngredients(Item):
       weight = item * product
       stack_size = GetMaxStack(item)
       weight /= stack_size
 
-      ArrayPush(weight, weights)
+      ArrayPush(weight, weights_id)
       total_weight += weight
     
 
-    idx = 1
     slot_range_start = 1
-    for item in LoopRecipeIngredients(Item):
-      weight = ArrayGet(weights, idx)
-      idx += 1
+    for weight in LoopElements(weights_id):
       
       n_slots = Remap(weight, 0, total_weight, 1, N_Slots)
       slot_range_end = slot_range_start + n_slots
       slot_range_end -= 1
-      range = CombineCoordinate(slot_range_start, slot_range_end)
-      FixItemSlots(item, range)
+      i = slot_range_start
+      while i <= slot_range_end:
+        FixItemSlots(item, i)
+        i += 1
 
       slot_range_start += n_slots
 
