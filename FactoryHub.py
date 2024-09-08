@@ -30,7 +30,7 @@ def FactoryHub(Item, N_Slots):
       slot_range_end -= 1
       i = slot_range_start
       while i <= slot_range_end:
-        FixItemSlots(item, i)
+        FixItemSlots(weight, i)
         i += 1
 
       slot_range_start += n_slots
